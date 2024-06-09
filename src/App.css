@@ -46,6 +46,13 @@ div {
   border-bottom: 1px solid grey;
 }
 
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background: darkgrey;
+  text-align: left;
+}
+
 .black-nav {
   display: flex;
   background: darkblue;

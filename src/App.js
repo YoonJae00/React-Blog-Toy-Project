@@ -15,14 +15,8 @@ function App() {
   let [like, likeChange] = useState(0);
   const currentDate = new Date();
 
-  const number = [];
-
-  for(var i = 0; i<6; i++){
-    const random = Math.floor(Math.random() * 45 + 1);
-    number.push(random);
-    number.push('/')
-  }
-
+  let [modal,setModal] = useState('close');
+  
 
   function changeTitle() {
     
@@ -30,6 +24,15 @@ function App() {
     newTitle[1] = 'ㅁ 리엑트 이틀만에 할수 있지롱';
     console.log(Title == newTitle);
     setTitle(newTitle);
+  }
+
+
+  function ModalClick() {
+    if(modal == 'close') {
+      setModal('open') } 
+    else {
+      setModal('close')
+    }
   }
 
   return (
@@ -43,25 +46,76 @@ function App() {
         newTitle.sort();
         setTitle(newTitle);
       }}>정렬하기</button>
-      <div className='list'>
+      <div className='list' onClick={ModalClick}>
         <h4>{Title[0]} <span onClick={() => { likeChange(like+1) } }>👍</span> {like} </h4>
         <p>{Time}<span onClick={ ()=> {setTime(currentDate.toLocaleString()) }}>현재 시각으로 변경</span></p>
       </div>
+      {
+        // 보통 없을때 null 많이 씀
+        modal == 'close' ? null : <Modal/>
+      }
+
     
-      <div className='list'>
+      <div className='list' onClick={ModalClick}>
         <h4>{Title[1]} <span style={{color: 'red'}} onClick={changeTitle}>제목 변경 마술</span></h4>
         <p>{Time}</p>
       </div>
-      <div className='list'>
+
+      {
+        // 보통 없을때 null 많이 씀
+        modal == 'close' ? null : <Modal/>
+      }
+
+      <div className='list' onClick={ModalClick}>
         <h4>{Title[2]}</h4>
         <p>{Time}</p>
       </div>
-      <div className='list'>
+
+      {
+        // 보통 없을때 null 많이 씀
+        modal == 'close' ? null : <Modal/>
+      }
+
+      <div className='list' onClick={ModalClick}>
         <h4>{Title[3]}</h4>
-        <p>{number.sort()}</p>
+        <Lotto/>
       </div>
+
+      {
+        // 보통 없을때 null 많이 씀
+        modal == 'close' ? null : <Modal/>
+      }
+
     </div>
   );
+}
+
+function Lotto() {
+
+  const number = [];
+
+  for(var i = 0; i<6; i++){
+    const random = Math.floor(Math.random() * 45 + 1);
+    number.push(random);
+    number.push('/')
+  }
+
+  return (
+    <p>{number}</p>
+  )
+}
+
+function Modal() {
+  // 2개의 div 불가
+  return (
+    <>
+      <div className='modal'>
+        <h4>제목</h4>
+        <p>날짜</p>
+        <p>상세내용</p>
+      </div>
+    </>
+  )
 }
 
 export default App;
