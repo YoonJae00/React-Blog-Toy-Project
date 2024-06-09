@@ -7,13 +7,22 @@ import { useState } from 'react';
 function App() {
 
   let post = '리엑트 뿌시기';
-  let [Title,setTitle] = useState(['리엑트 하루컷으로 배우기','리엑트 하루안에 절대 못함', '게시판 기능 추가 예정']);
+  let [Title,setTitle] = useState(['리엑트 하루컷으로 배우기','리엑트 하루안에 절대 못함', '게시판 기능 추가 예정','랜덤번호 로또 추출']);
   let [Time, setTime] = useState('2024-06-07');
   // useState [a, c] ==> Title = '리엑트 어쩌구~~', b = state 변경 함수
   // State 쓰던 html 은 자동변경이 됨. ==> 재렌더링 함
   // let [a, c] = [1, 2];
   let [like, likeChange] = useState(0);
   const currentDate = new Date();
+
+  const number = [];
+
+  for(var i = 0; i<6; i++){
+    const random = Math.floor(Math.random() * 45 + 1);
+    number.push(random);
+    number.push('/')
+  }
+
 
   function changeTitle() {
     
@@ -46,6 +55,10 @@ function App() {
       <div className='list'>
         <h4>{Title[2]}</h4>
         <p>{Time}</p>
+      </div>
+      <div className='list'>
+        <h4>{Title[3]}</h4>
+        <p>{number.sort()}</p>
       </div>
     </div>
   );
